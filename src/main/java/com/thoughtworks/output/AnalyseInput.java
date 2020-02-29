@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class AnalyseInput {
+public class AnalyseInput implements IOutputInstruction {
 
     private String answer;
     private String input;
@@ -14,6 +14,7 @@ public class AnalyseInput {
         this.input = input;
     }
 
+    @Override
     public String printInstruction() {
         List<String> answerList = new ArrayList<>(Arrays.asList(answer.split("")));
         List<String> inputList = new ArrayList<>(Arrays.asList(input.split("")));
