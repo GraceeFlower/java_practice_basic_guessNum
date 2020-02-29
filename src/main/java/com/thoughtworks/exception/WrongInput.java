@@ -1,9 +1,9 @@
-package com.thoughtworks.output;
+package com.thoughtworks.exception;
 
 import java.util.Arrays;
 import java.util.HashSet;
 
-public class WrongInput implements IOutputInstruction {
+public class WrongInput {
 
     private String answer;
     private String input;
@@ -11,11 +11,6 @@ public class WrongInput implements IOutputInstruction {
     public WrongInput(String answer, String input) {
         this.answer = answer;
         this.input = input;
-    }
-
-    @Override
-    public String printInstruction() {
-        return isWrong() ? "Wrong input" : null;
     }
 
     public boolean isWrong() {

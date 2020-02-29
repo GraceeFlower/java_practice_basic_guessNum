@@ -1,6 +1,8 @@
 package com.thoughtworks;
 
 import com.thoughtworks.answer.ChooseAnswer;
+import com.thoughtworks.exception.WrongInput;
+import com.thoughtworks.exception.WrongInputException;
 import com.thoughtworks.output.*;
 
 import java.util.ArrayList;
@@ -17,9 +19,12 @@ public class App {
         for (int i = 0; i < 6;) {
             String input = scanner.nextLine();
             WrongInput wrong = new WrongInput(answer, input);
-            if (wrong.isWrong()) {
-                System.out.println(wrong.printInstruction());
-                System.out.println("您还有" + (6 - i) + "次机会：");
+            try {
+                if (wrong.isWrong()) {
+                    throw new WrongInputException("Wrong Input! Try again!");
+                }
+            } catch(WrongInputException e) {
+                e.printStackTrace();
                 continue;
             }
             if (answer.equals(input)) {
@@ -30,8 +35,8 @@ public class App {
                 System.out.println(new DefaultGame(answer).printInstruction());
                 break;
             }
-            ChooseOutput analysis = new ChooseOutput(answer, input);
-            guessList.add("input：" + input + "，output：" + analysis.printOutPut());
+            guessList.add("input：" + input + "，output："
+                + new AnalyseInput(answer, input).printInstruction());
             for (String s : guessList) {
                 System.out.println(s);
             }
