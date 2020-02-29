@@ -15,10 +15,11 @@ public class WrongInput implements IOutputInstruction {
 
     @Override
     public String printInstruction() {
-        if (isLessThanLength() || isRepeatChar()) {
-            return "Wrong input";
-        }
-        return null;
+        return isWrong() ? "Wrong input" : null;
+    }
+
+    public boolean isWrong() {
+        return isLessThanLength() || isRepeatChar();
     }
 
     private boolean isLessThanLength() {
@@ -26,6 +27,6 @@ public class WrongInput implements IOutputInstruction {
     }
 
     private boolean isRepeatChar() {
-        return new HashSet<>(Arrays.asList(input.split(""))).size() > answer.length();
+        return answer.length() > new HashSet<>(Arrays.asList(input.split(""))).size();
     }
 }

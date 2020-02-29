@@ -10,6 +10,6 @@ public class DefaultGame implements IOutputInstruction {
 
     @Override
     public String printInstruction() {
-        return "Unfortunately, you have no chance, the answer is" + answer + "!";
+        return "Unfortunately, you have no chance, the answer is " + answer + "!";
     }
 }
