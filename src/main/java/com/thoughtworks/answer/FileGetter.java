@@ -14,8 +14,9 @@ public class FileGetter implements AnswerGetter {
     public String getAnswer() {
         StringBuilder answer = new StringBuilder();
         try(InputStream input = new FileInputStream(path)) {
-            while (-1 != input.read()) {
-                answer.append((char) input.read());
+            int num;
+            while (-1 != (num = input.read())) {
+                answer.append((char)num);
             }
         } catch (IOException e) {
             e.printStackTrace();
