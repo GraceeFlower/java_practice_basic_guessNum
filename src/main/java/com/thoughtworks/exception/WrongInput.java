@@ -18,10 +18,10 @@ public class WrongInput {
     }
 
     private boolean isLessThanLength() {
-        return answer.length() > input.length();
+        return answer.length() != input.length();
     }
 
     private boolean isRepeatChar() {
-        return answer.length() > new HashSet<>(Arrays.asList(input.split(""))).size();
+        return answer.length() != new HashSet<>(Arrays.asList(input.split(""))).size();
     }
 }
