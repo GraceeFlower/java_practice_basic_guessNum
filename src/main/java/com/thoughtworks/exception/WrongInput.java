@@ -14,14 +14,14 @@ public class WrongInput {
     }
 
     public boolean isWrong() {
-        return isLessThanLength() || isRepeatChar();
+        return isWrongLength() || isRepeat();
     }
 
-    private boolean isLessThanLength() {
+    private boolean isWrongLength() {
         return answer.length() != input.length();
     }
 
-    private boolean isRepeatChar() {
+    private boolean isRepeat() {
         return answer.length() > new HashSet<>(Arrays.asList(input.split(""))).size();
     }
 }
