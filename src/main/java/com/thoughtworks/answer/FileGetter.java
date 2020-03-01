@@ -13,10 +13,10 @@ public class FileGetter implements AnswerGetter {
     @Override
     public String getAnswer() {
         StringBuilder answer = new StringBuilder();
-        try(InputStream input = new FileInputStream(path)) {
-            int num;
-            while (-1 != (num = input.read())) {
-                answer.append((char)num);
+        try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                answer.append(line);
             }
         } catch (IOException e) {
             e.printStackTrace();
