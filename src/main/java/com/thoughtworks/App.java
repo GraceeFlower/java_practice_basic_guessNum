@@ -12,7 +12,6 @@ import java.util.Scanner;
 public class App {
 
     public static void main(String[] args) {
-        String[] frequency = {"一", "二", "三", "四", "五", "六"};
         String answer = new ChooseAnswer("./src/main/resources/answer.txt").chooseGetter();
         String instruction;
         List<String> guessList = new ArrayList<>();
@@ -26,7 +25,7 @@ public class App {
                     i--;
                     throw new WrongInputException("Wrong Input");
                 } else {
-                    System.out.println(input + "// 第" + frequency[i] + "次");
+                    System.out.println(input + " " + new PrintFrequency(i));
                 }
             } catch(WrongInputException e) {
                 instruction = e.getMessage();
