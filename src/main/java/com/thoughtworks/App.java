@@ -12,35 +12,35 @@ import java.util.Scanner;
 public class App {
 
     public static void main(String[] args) {
+        String[] frequency = {"一", "二", "三", "四", "五", "六"};
         String answer = new ChooseAnswer("./src/main/resources/answer.txt").chooseGetter();
+        String instruction;
         List<String> guessList = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
-        System.out.println("请输入您猜测的数字：");
-        for (int i = 0; i < 6;) {
+        System.out.println("游戏开始，请输入您猜测的数字：");
+        for (int i = 0; i < 6; i++) {
             String input = scanner.nextLine();
+            instruction = new AnalyseInput(answer, input).printInstruction();
             try {
                 if (new WrongInput(answer, input).isWrong()) {
-                    throw new WrongInputException("Wrong Input! Try again!");
+                    i--;
+                    throw new WrongInputException("Wrong Input");
+                } else {
+                    System.out.println(input + "// 第" + frequency[i] + "次");
                 }
             } catch(WrongInputException e) {
-                e.printStackTrace();
-                continue;
+                instruction = e.getMessage();
+            }
+            guessList.add(input + " " + instruction);
+            for (String s : guessList) {
+                System.out.println(s);
             }
             if (answer.equals(input)) {
                 System.out.println(new WinGame().printInstruction());
                 break;
-            }
-            if (i == 5) {
+            } else if (i == 5) {
                 System.out.println(new DefaultGame(answer).printInstruction());
-                break;
             }
-            guessList.add("input：" + input + "，output："
-                + new AnalyseInput(answer, input).printInstruction());
-            for (String s : guessList) {
-                System.out.println(s);
-            }
-            i++;
-            System.out.println("您还有" + (6 - i) + "次机会：");
         }
     }
 }
