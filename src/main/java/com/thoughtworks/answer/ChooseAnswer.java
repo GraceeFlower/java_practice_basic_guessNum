@@ -12,6 +12,6 @@ public class ChooseAnswer {
 
     public String chooseGetter() {
         return new File(path).isFile() ?
-            new FileGetter(path).getAnswer() : new RandomGetter().getAnswer();
+            new FileGetter(path).getAnswer().trim() : new RandomGetter().getAnswer().trim();
     }
 }

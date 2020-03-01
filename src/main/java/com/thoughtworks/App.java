@@ -18,9 +18,8 @@ public class App {
         System.out.println("请输入您猜测的数字：");
         for (int i = 0; i < 6;) {
             String input = scanner.nextLine();
-            WrongInput wrong = new WrongInput(answer, input);
             try {
-                if (wrong.isWrong()) {
+                if (new WrongInput(answer, input).isWrong()) {
                     throw new WrongInputException("Wrong Input! Try again!");
                 }
             } catch(WrongInputException e) {
