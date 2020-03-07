@@ -15,7 +15,6 @@ public class ChooseAnswer {
     public String chooseGetter() {
         String fileAnswer = new FileGetter(path).getAnswer();
         boolean isWrong = new WrongInput("1234", fileAnswer).isWrong();
-        System.out.println(fileAnswer + isWrong);
         return new File(path).isFile() && !isWrong?
             new FileGetter(path).getAnswer() : new RandomGetter().getAnswer();
     }
