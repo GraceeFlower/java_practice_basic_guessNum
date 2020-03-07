@@ -6,6 +6,7 @@ import com.thoughtworks.exception.WrongInputException;
 import com.thoughtworks.output.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -19,13 +20,18 @@ public class App {
         System.out.println("游戏开始，请输入您猜测的数字：");
         for (int i = 0; i < 6; i++) {
             String input = scanner.nextLine();
-            instruction = new AnalyseInput(answer, input).printInstruction();
+            if (new WrongInput(input).isWrongFormat()) {
+                i--;
+                System.out.println("您输入的格式错误(必须是纯数字)，请重新输入：");
+                continue;
+            }
             try {
                 if (new WrongInput(answer, input).isWrong()) {
                     i--;
                     throw new WrongInputException("Wrong Input");
                 } else {
-                    System.out.println(input + " " + new PrintFrequency(i));
+                    instruction = new AnalyseInput(answer, input).printInstruction();
+                    System.out.println(input + " " + new PrintFrequency(i).printInstruction());
                 }
             } catch(WrongInputException e) {
                 instruction = e.getMessage();

@@ -5,23 +5,37 @@ import java.util.HashSet;
 
 public class WrongInput {
 
-    private String answer;
     private String input;
+    private int answerLen;
 
     public WrongInput(String answer, String input) {
-        this.answer = answer;
+        this.answerLen = answer.length();
+        this.input = input;
+    }
+
+    public WrongInput(String input) {
         this.input = input;
     }
 
     public boolean isWrong() {
-        return isWrongLength() || isRepeat();
+        return isWrongLength() || isWrongFormat() || isRepeat();
     }
 
     private boolean isWrongLength() {
-        return answer.length() != input.length();
+        return answerLen != input.length();
     }
 
     private boolean isRepeat() {
-        return answer.length() > new HashSet<>(Arrays.asList(input.split(""))).size();
+        return answerLen > new HashSet<>(Arrays.asList(input.split(""))).size();
+    }
+
+    public boolean isWrongFormat() {
+        char[] strArr = this.input.toCharArray();
+        for (char c : strArr) {
+            if (c > 57 || c < 48) {
+                return true;
+            }
+        }
+        return false;
     }
 }

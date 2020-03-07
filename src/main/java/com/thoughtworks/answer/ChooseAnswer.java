@@ -1,5 +1,7 @@
 package com.thoughtworks.answer;
 
+import com.thoughtworks.exception.WrongInput;
+
 import java.io.File;
 
 public class ChooseAnswer {
@@ -11,7 +13,10 @@ public class ChooseAnswer {
     }
 
     public String chooseGetter() {
-        return new File(path).isFile() ?
+        String fileAnswer = new FileGetter(path).getAnswer();
+        boolean isWrong = new WrongInput("1234", fileAnswer).isWrong();
+        System.out.println(fileAnswer + isWrong);
+        return new File(path).isFile() && !isWrong?
             new FileGetter(path).getAnswer() : new RandomGetter().getAnswer();
     }
 }
